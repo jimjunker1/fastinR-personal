@@ -7,8 +7,8 @@ Suggests: denstrip,testthat
 Title: Fatty Acids and Stable Isotopes in R
 Version: 0.5
 Date: 2017-03-06
-Author: Philipp Neubauer
-Maintainer: Philipp Neubauer <neubauer.phil@gmail.com>
+Author: Philipp Neubauer; modified by Jim Junker
+Maintainer: Philipp Neubauer <neubauer.phil@gmail.com>; Jim Junker <james.junker1@gmail.com>
 Description: This packages provides functions to perfom Bayesian estiamtion of
     diet proportions based on fatty acid profiles, stable isotopes and their
     combination. Bayesian estiamtion is currently performed using the R package
