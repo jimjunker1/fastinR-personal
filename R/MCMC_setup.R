@@ -34,7 +34,7 @@
 #' plot(MCMCout, save = F)
 #' }
 #' @export
-run_MCMC <- function(datas = NULL, Covs = NULL, nIter = 10000, nBurnin = 1000, nChains = 1, nThin = 10, Data.Type = "Fatty.Acid.Profiles", Analysis.Type = "Population.proportions", even = 0.5, Rnot = 0.2, Rnot_SI = 1, plott = T, spawn = F) {
+run_MCMC <- function(datas = NULL, Covs = NULL, nIter = 10000, nBurnin = 1000, nChains = 1, nThin = 10, Data.Type = "Fatty.Acid.Profiles", Analysis.Type = "Population.proportions", even = 0.5, Rnot = 0.2, Rnot_SI = 1, plott = T, spawn = F, filepath = getwd()) {
   # have three types here: FA, SI and combined, then methods dispatch based on type of arg
 
   if (missing(datas)) {
@@ -76,7 +76,7 @@ run_MCMC <- function(datas = NULL, Covs = NULL, nIter = 10000, nBurnin = 1000, n
       jagsdata <- .delist(datas)
     }
 
-    save(jagsdata, file = "jagsdata.Rdata")
+    save(jagsdata, file = paste0(filepath,"/jagsdata.Rdata"))
 
     sysfile <- switch(Analysis.Type,
       Population.proportions = .Poppropanalysis(datas),
@@ -129,7 +129,7 @@ run_MCMC <- function(datas = NULL, Covs = NULL, nIter = 10000, nBurnin = 1000, n
 # This is called internally in the slave processes to run jags
 .jagger <- function(sysfile, nBurnin, nIter, nThin, i) {
   options(warn = -1)
-  load("jagsdata.Rdata")
+  load(paste0(filepath,"/jagsdata.Rdata"))
   JM <- jags.model(file = sysfile, data = jagsdata, inits = list(.RNG.name = "base::Mersenne-Twister", .RNG.seed = i), n.chains = 1)
 
   cat("\n", "proceeding to burn-in phase", "\n")

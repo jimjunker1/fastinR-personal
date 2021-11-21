@@ -120,9 +120,7 @@ add_SI <- function(SI.predators = NULL, SI.preys = NULL, Frac.Coeffs.mean = "", 
     preys.SI <- SI.preys
   }
 
-
-
-  n.preds <- dim(predators.SI)[1]
+n.preds <- dim(predators.SI)[1]
 
   preys.ix.SI <- as.character(preys.SI[, 1])
   preys.SI <- preys.SI[, -1]
@@ -279,7 +277,6 @@ add_FA <- function(FA.predators = NULL, FA.preys = NULL, fat.conts = "", Conv.Co
   if (any(preys < 0) | any(predators < 0)) {
     stop("Fatty acid values must all be greater than 0. Please replace zeros with a small number or use a more advanced heuristic or statistic to figure out an appopriate value.")
   }
-
 
   n.fats <- ncol(predators)
   m.fats <- n.fats - 1
